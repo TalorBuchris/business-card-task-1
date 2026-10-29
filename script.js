@@ -15,6 +15,7 @@
 // Step 6: reset button
 
 let body = document.querySelector("body");
+let form = document.querySelector("form");
 let nameInput = document.querySelector("#name-input");
 let jobInput = document.querySelector("#job-input");
 let emailInput = document.querySelector("#email-input");
@@ -23,6 +24,7 @@ let colorSelect = document.querySelector("#color-select");
 let bioCounter = document.querySelector("#bio-left");
 let counter = document.querySelector(".counter");
 let themeBtn = document.querySelector("#theme-btn");
+let resetBtn = document.querySelector("#reset-btn");
 
 console.log(nameInput.value, jobInput.value, emailInput.value, bioInput.value, colorSelect.value);
 
@@ -49,7 +51,8 @@ jobInput.addEventListener("input", changeJobInput);
 emailInput.addEventListener("input", changeEmailInput);
 bioInput.addEventListener("input", changeBioInput);
 colorSelect.addEventListener("change", changeColorSelect);
-themeBtn.addEventListener("click", toggleDarkMode)
+themeBtn.addEventListener("click", toggleDarkMode);
+resetBtn.addEventListener("click", resetPage)
 
 
 // פונקציות לשינוי התוכן בכרטיס בעת שינוי
@@ -85,7 +88,20 @@ function changeColorSelect() {
 }
 
 // הוספת מצב כהה
-function toggleDarkMode(){
+function toggleDarkMode() {
     body.classList.toggle("dark");
-    themeBtn.textContent =  body.classList.contains("dark") ? "Light mode" : "Dark mode";
+    themeBtn.textContent = body.classList.contains("dark") ? "Light mode" : "Dark mode";
+}
+
+// איפוס הדף
+function resetPage() {
+    form.reset();
+
+    changeNameInput();
+    changeJobInput();
+    changeEmailInput();
+    changeBioInput();
+    changeColorSelect();
+    if (body.classList.contains("dark"))
+        toggleDarkMode();
 }
