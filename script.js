@@ -14,8 +14,7 @@
 
 // Step 6: reset button
 
-// טקסט דינמי
-// האינפוטים
+let body = document.querySelector("body");
 let nameInput = document.querySelector("#name-input");
 let jobInput = document.querySelector("#job-input");
 let emailInput = document.querySelector("#email-input");
@@ -23,15 +22,16 @@ let bioInput = document.querySelector("#bio-input");
 let colorSelect = document.querySelector("#color-select");
 let bioCounter = document.querySelector("#bio-left");
 let counter = document.querySelector(".counter");
+let themeBtn = document.querySelector("#theme-btn");
 
 console.log(nameInput.value, jobInput.value, emailInput.value, bioInput.value, colorSelect.value);
 
 // השדות בכרטיס
 let avatar = document.querySelector("#avatar")
-let cardName = document.querySelector("#card-name")
-let cardJob = document.querySelector("#card-job")
-let cardEmail = document.querySelector("#card-email")
-let cardBio = document.querySelector("#card-bio")
+let cardName = document.querySelector("#card-name");
+let cardJob = document.querySelector("#card-job");
+let cardEmail = document.querySelector("#card-email");
+let cardBio = document.querySelector("#card-bio");
 
 // תוכן ברירת מחדל
 const displayAvatar = avatar.innerHTML;
@@ -39,6 +39,7 @@ const displayCardName = cardName.innerHTML;
 const displayCardJob = cardJob.innerHTML;
 const displayCardEmail = cardEmail.innerHTML;
 const displayCardBio = cardBio.innerHTML;
+const themeBtnText = themeBtn.value;
 
 console.log("BBBBBBBBB" + displayAvatar, displayCardName, displayCardJob, displayCardEmail, displayCardBio);
 
@@ -48,6 +49,7 @@ jobInput.addEventListener("input", changeJobInput);
 emailInput.addEventListener("input", changeEmailInput);
 bioInput.addEventListener("input", changeBioInput);
 colorSelect.addEventListener("change", changeColorSelect);
+themeBtn.addEventListener("click", toggleDarkMode)
 
 
 // פונקציות לשינוי התוכן בכרטיס בעת שינוי
@@ -74,8 +76,16 @@ function changeBioInput() {
     bioCounter.textContent = chars;
     counter.classList.toggle("warning", chars <= 10);
 }
+
+// החלפת צבע לאווטר ולמסגרת הכרטיס
 function changeColorSelect() {
     let card = document.querySelector("#card");
     avatar.style.backgroundColor = colorSelect.value;
     card.style.borderColor = colorSelect.value;
+}
+
+// הוספת מצב כהה
+function toggleDarkMode(){
+    body.classList.toggle("dark");
+    themeBtn.textContent =  body.classList.contains("dark") ? "Light mode" : "Dark mode";
 }
