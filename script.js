@@ -14,4 +14,68 @@
 
 // Step 6: reset button
 
-//
+// טקסט דינמי
+// האינפוטים
+let nameInput = document.querySelector("#name-input");
+let jobInput = document.querySelector("#job-input");
+let emailInput = document.querySelector("#email-input");
+let bioInput = document.querySelector("#bio-input");
+let colorSelect = document.querySelector("#color-select");
+let bioCounter = document.querySelector("#bio-left");
+let counter = document.querySelector(".counter");
+
+console.log(nameInput.value, jobInput.value, emailInput.value, bioInput.value, colorSelect.value);
+
+// השדות בכרטיס
+let avatar = document.querySelector("#avatar")
+let cardName = document.querySelector("#card-name")
+let cardJob = document.querySelector("#card-job")
+let cardEmail = document.querySelector("#card-email")
+let cardBio = document.querySelector("#card-bio")
+
+// תוכן ברירת מחדל
+const displayAvatar = avatar.innerHTML;
+const displayCardName = cardName.innerHTML;
+const displayCardJob = cardJob.innerHTML;
+const displayCardEmail = cardEmail.innerHTML;
+const displayCardBio = cardBio.innerHTML;
+
+console.log("BBBBBBBBB" + displayAvatar, displayCardName, displayCardJob, displayCardEmail, displayCardBio);
+
+// הוספת האזנה לאירועים
+nameInput.addEventListener("input", changeNameInput);
+jobInput.addEventListener("input", changeJobInput);
+emailInput.addEventListener("input", changeEmailInput);
+bioInput.addEventListener("input", changeBioInput);
+colorSelect.addEventListener("change", changeColorSelect);
+
+
+// פונקציות לשינוי התוכן בכרטיס בעת שינוי
+function changeNameInput() {
+    if (!nameInput.value.trim()) {
+        cardName.textContent = displayCardName;
+        avatar.textContent = displayAvatar;
+    }
+    else {
+        let name = nameInput.value.trim();
+        cardName.textContent = name;
+        avatar.textContent = name[0].toUpperCase();
+    }
+}
+function changeJobInput() {
+    cardJob.textContent = !jobInput.value.trim() ? displayCardJob : jobInput.value.trim();
+}
+function changeEmailInput() {
+    cardEmail.textContent = !emailInput.value.trim() ? displayCardEmail : emailInput.value.trim();
+}
+function changeBioInput() {
+    cardBio.textContent = !bioInput.value.trim() ? displayCardBio : bioInput.value.trim();
+    let chars = (80 - bioInput.value.length);
+    bioCounter.textContent = chars;
+    counter.classList.toggle("warning", chars <= 10);
+}
+function changeColorSelect() {
+    let card = document.querySelector("#card");
+    avatar.style.backgroundColor = colorSelect.value;
+    card.style.borderColor = colorSelect.value;
+}
